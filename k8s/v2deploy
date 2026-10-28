@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: flask-v2
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: flask-v2
+
+  template:
+    metadata:
+      labels:
+        app: flask-v2
+
+    spec:
+      containers:
+        - name: flask-v2
+
+          # CHANGE: Replace YOUR_DOCKERHUB_USERNAME
+          image: YOUR_DOCKERHUB_USERNAME/flask-lab-app:v2
+
+          ports:
+            - containerPort: 5000
