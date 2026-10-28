@@ -1,0 +1,30 @@
+Checking docker and Kubernetes installation
+docker info if error then open docker desktop
+kubectl version --client
+kubectl get nodes
+
+Creating venv to run the app locally
+pwd
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python app.py
+python -m pytest -v
+
+Pushing the images to dockerhub
+docker build -t YOUR_DOCKERHUB_USERNAME/flask-lab-app:v1 .
+docker images
+docker run --rm -p 5000:5000 YOUR_DOCKERHUB_USERNAME/flask-lab-app:v1
+docker push YOUR_DOCKERHUB_USERNAME/flask-lab-app:v1
+docker build -t YOUR_DOCKERHUB_USERNAME/flask-lab-app:v2 .
+docker push YOUR_DOCKERHUB_USERNAME/flask-lab-app:v2
+docker build -t YOUR_DOCKERHUB_USERNAME/flask-lab-app:v3 .
+docker push YOUR_DOCKERHUB_USERNAME/flask-lab-app:v3
+
+Running in Kubernetes
+kubectl config current-context 
+kubectl get nodes
+kubectl apply -f k8s/deployment-v1.yaml
+kubectl apply -f k8s/service-v1.yaml
+kubectl get deployments
+kubectl get pods kubectl get services
